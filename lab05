@@ -1,0 +1,94 @@
+import static java.lang.String.valueOf;
+import java.util.*;
+
+
+
+public class Lab05 {
+    static Scanner console = new Scanner(System.in);
+    
+    public static void main (String[] args)
+    {
+        String num1, num2, add_num;
+        int arr_size1, arr_size2;
+        System.out.print("Enter the first number: ");
+        num1 = console.next();
+        System.out.print("\nEnter the second number: ");
+        num2 = console.next();
+        
+        arr_size1 = num1.length();
+        arr_size2 = num2.length();
+        
+        int [] arr1, arr2;
+        arr1 = new int [arr_size1];
+        arr2 = new int [arr_size2];
+
+        stringconverter(arr1, arr_size1, num1);
+        stringconverter(arr2, arr_size2, num2);
+        
+        add_num = Addition(arr1, arr_size1, arr2, arr_size2);
+        
+        System.out.printf("\n    %s\n+   %s\n=   %s\n", num1, num2, add_num);
+        
+        
+        
+        
+        
+    }
+    
+    static void stringconverter(int arr[], int arr_size, String num)
+    {
+        for(int count = arr_size; count > 0; count--)
+        {
+            arr[arr_size - count] = (int)num.charAt(count - 1);
+        }
+    }
+    
+    static String Addition(int arr1[], int arr_size1, int arr2[], int arr_size2)
+    {
+        int hold, added_arr[], add_size;
+        String added_num = "";
+        char added_char [];
+        if (arr_size1 > arr_size2)
+        {
+            add_size = arr_size1;
+            if(arr1[arr_size1 - 1] + arr2[arr_size2 - 1] >= 10)
+                added_arr = new int[++add_size];
+            else
+                added_arr = new int[add_size];
+        }
+        else
+        {
+            add_size = arr_size2;
+            if(arr1[arr_size1 - 1] + arr2[arr_size2 - 1] >= 10)
+                added_arr = new int[++add_size];
+            else
+                added_arr = new int[add_size];
+        }
+        
+        for(int count = 0; count < arr_size1 && count < arr_size2; count++)
+        {
+            hold = arr1[count] + arr2[count] + added_arr[count];
+            if(hold < 10)
+                added_arr[count] = hold;
+            else
+            {
+                added_arr[count] = hold - 10;
+                added_arr[count + 1] = 1;
+            }
+        }
+        added_char = new char[add_size];
+        
+        for(int count = add_size; count > 0;  count--)
+        {
+            added_num += valueOf(added_arr[count - 1]);
+        }
+   
+        
+        return added_num;
+    }
+    
+    
+    
+    
+    
+}
